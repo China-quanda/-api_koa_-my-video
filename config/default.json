@@ -2,7 +2,7 @@
 	"config_name" : "develop",
 	"jwt_config" : {
 		"jwtSecretKey":"itcaliquandast",
-		"expiresIn":"2h"
+		"expiresIn":"10h"
 	},
 	"upload_config":{
 		"baseURL":"http://127.0.0.1:3000",

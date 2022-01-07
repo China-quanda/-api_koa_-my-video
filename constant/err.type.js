@@ -21,12 +21,27 @@ module.exports = {
   },
   userLoginError:{
     code:'10005',
-    message:'用户登录失败！!',
+    message:'用户登录失败！',
     result:'',
   },
   invalidPassword:{
     code:'10006',
     message:'您输入的密码不正确!',
+    result:'',
+  },
+  TokenExpiredError:{
+    code:'10101',
+    message:'token已过期！',
+    result:'',
+  },
+  invalidToken:{
+    code:'10102',
+    message:'无效的token!',
+    result:'',
+  },
+  updatePasswordError:{
+    code:'10007',
+    message:'修改密码失败!',
     result:'',
   }
 }

@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken')
 // //导入全局的配置文件
 const { jwt_config } = require('../config/default')
 
-const { createUser ,getUserInfo} = require('../service/user.service')
+const { createUser ,getUserInfo,updateById} = require('../service/user.service')
 
-const { userRegisterError } = require('../constant/err.type')
+const { userRegisterError,updatePasswordError } = require('../constant/err.type')
 
 
 class UserController {
@@ -62,7 +62,6 @@ class UserController {
 
   async login(ctx, next) {
     const { user_name } = ctx.request.body
-    //确认密码正确后 生成JWT的token字符串
   //  获取用户信息
   try {
      const { password,paypassword, ...res} = await getUserInfo({ user_name })
@@ -70,7 +69,7 @@ class UserController {
        code:0,
        message:'用户登录成功ok',
        result:{
-         token:jwt.sign(res, jwt_config.jwtSecretKey, { expiresIn: jwt_config.expiresIn })
+         token:'Bearer '+jwt.sign(res, jwt_config.jwtSecretKey, { expiresIn: jwt_config.expiresIn })
        }
      }
   } catch (error) {
@@ -78,7 +77,29 @@ class UserController {
   }
   }
 
-
+  async changePassword(ctx,next){
+    // 1获取数据
+      const id =ctx.state.user.id
+      const password = ctx.request.body.password
+       // 判断用户输入的旧密码是否正确
+       // 正确的话更新数据库中的密码
+       //对新密码进行bcrypt加密处理
+    // 2操作数据库
+    try {
+      if(await updateById({id,password})){
+        // 3返回结果
+        ctx.body = {
+          code:0,
+          message: '修改密码成功ok',
+          result: ''
+        }
+      }
+    } catch (error) {
+      console.error('修改密码失败！', error);
+      ctx.app.emit('error', updatePasswordError,ctx)
+    }
+    
+  }
 }
 module.exports = new UserController()
 

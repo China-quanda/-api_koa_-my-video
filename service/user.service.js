@@ -16,7 +16,7 @@ class UserService {
   async getUserInfo({...args}){
     const whereOpt = {...args}
     const res = await User.findOne({ 
-          attributes:['user_name','email','mobile','is_admin','stutas','password','paypassword'],//
+          attributes:['id','user_name','email','mobile','is_admin','stutas','password','paypassword'],//
           where: whereOpt
          });
         return res ? res.dataValues : null
@@ -35,6 +35,22 @@ class UserService {
   //    });
   //   return res ? res.dataValues : null
   // }
+
+  // async updateById({id,password}){
+  //   const whereOpt = {id}
+  //   const newUser = {id,password}
+  //   const res = await User.update(newUser,{ where: whereOpt});
+  //   console.log(res);
+  //   console.log('id',id);
+  //   console.log('pwd',password);
+  //   return res[0]>0 ? true : false;
+  // }
+  async updateById({id,password}){
+    const whereOpt = {id}
+    const newUser = {id,password}
+    const res = await User.update(newUser,{ where: whereOpt});
+    return res[0]>0 ? true : false;
+  }
 }
 
 module.exports = new UserService()
