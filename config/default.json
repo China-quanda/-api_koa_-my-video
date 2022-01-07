@@ -1,0 +1,53 @@
+{
+	"config_name" : "develop",
+	"jwt_config" : {
+		"jwtSecretKey":"itcaliquandast",
+		"expiresIn":"2h"
+	},
+	"upload_config":{
+		"baseURL":"http://127.0.0.1:3000",
+		"upload_ueditor":"uploads/ueditor",
+		"simple_upload_redirect":"http://127.0.0.1/uploads/img",
+		"img_upload_type":["image/jpg","image/png","image/gif","image/jpeg","image/bmp","image/wedp","image/ico","image/flic","image/heic","image/tif"]
+
+	},
+	"db_config" : {
+		"protocol" : "mysql",
+		"host" : "127.0.0.1",
+		"database" : "my_video",
+		"user" : "root",
+		"password" : "admin123",
+		"port" : 3306
+	},
+	"logs_config":{
+		"appenders":{
+			"cheese":{ 
+				"type": "file", 
+				"filename": "../logs/cheese.log" 
+			},
+			"access":{ 
+				"type": "file", 
+				"filename": "../logs/access.log" 
+			},
+			"db":{ 
+				"type": "file", 
+				"filename": "../logs/db.log" 
+			}
+		},
+		"categories":{
+			"default":{ 
+				"appenders":["cheese"], 
+				"level": "info" 
+			},
+			"access":{ 
+				"appenders": ["access"], 
+				"level": "info" 
+			},
+			"db":{ 
+				"appenders": ["db"], 
+				"level": "info" 
+			}
+		}
+	}
+  
+}
