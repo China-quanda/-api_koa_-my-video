@@ -27,11 +27,11 @@ const port = 3000 // 端口号
 // add.use(AccessLogmiddleware)
 // error() 是正常用法  里面配置了对象就是高级用法
 app.use(error({
-  format:(err) => {
-    return { status: err.status || err.statusCode || 500 , message: err.message, result: err.stack}
+  format: (err) => {
+    return { status: err.status || err.statusCode || 500, message: err.message, result: err.stack }
   },
-  postFormat:(err,obj) =>{
-    const {result,...stack} = obj
+  postFormat: (err, obj) => {
+    const { result, ...stack } = obj
     // 如果是生产环境只返回message和code ，开发环境全返回
     return process.env.NODE_ENV === 'production' ? stack : obj
   }
@@ -40,30 +40,25 @@ app.use(error({
 // 这里cors中间件一定要写在路由之前
 app.use(cors());
 
-// 注册中间件 并配置需要托管的文件目录
-// app.use(static('./public'))
-app.use(static(path.join(__dirname, '/public')))
 // app.use(mount('/home',static(path.join(__dirname, '/public')))
 // 在所有中间件之前注册全局中间件挂载到ctx.request.body
 app.use(koaBody({
   multipart: true,
   formidable: {
-    // uploadDir: __dirname + '/uploads',
-      maxFileSize: 2000 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
+    // uploadDir: path.join(__dirname, '/uploads'), //文件上传地址
+    maxFileSize: 2000 * 1024 * 1024  ,  // 设置上传文件大小最大限制，默认2M
+    keepExtensions:true, //保存上传文件的后缀名
   }
 }))
+// 注册中间件 并配置需要托管的文件目录
+// app.use(static('./public'))
+app.use(static(path.join(__dirname, '/public')))
 
-
-  // 挂载路由 中间件
+// 挂载路由 中间件
 app
   .use(router.routes())
   // 访问不到路由会把状态吗改为 501 
   .use(router.allowedMethods())
-
-
-
-
-
 
 
 
@@ -72,13 +67,11 @@ app
 // 2，手动抛出：通过ctx.throw手动抛出
 // 3，运行时错误 500 时
 // 统一错误处理
-app.on('error',errHandler)
-
-
+app.on('error', errHandler)
 
 
 
 // 启动服务器并监听3000端口
-app.listen(port,()=>{
+app.listen(port, () => {
   console.log(`server is running on http://127.0.0.1:${port}`);
 }) 

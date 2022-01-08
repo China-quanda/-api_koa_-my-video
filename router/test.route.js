@@ -4,7 +4,7 @@ const Router = require('koa-router')
 const {testfn} = require('../controller/test.controller')
 // const user = new Router({ prefix: '/user' })
 // 实例化路由对象      { prefix: '/user' }) 开启路由前缀   
-const test = new Router()
+const test = new Router({ prefix: '/test'})
 
 
 
