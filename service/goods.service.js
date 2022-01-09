@@ -25,7 +25,11 @@ class GoodsService{
     // const rows = await Goods.findAll({offset,limit:pageSize * 1})
     // 优化上面代码
     const offset = (pageNum -1) * pageSize
-    const {count,rows} = await Goods.findAndCountAll({offset,limit:pageSize * 1})
+    const {count,rows} = await Goods.findAndCountAll({
+      attributes:['id','goods_name','goods_price','goods_num','goods_img'],
+      offset,
+      limit:pageSize * 1
+    })
     return {
       pageNum,
       pageSize,

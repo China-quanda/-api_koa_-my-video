@@ -68,8 +68,8 @@ class UserController {
      ctx.body = {
        code:0,
        message:'用户登录成功ok',
-       result:{
-         token:'Bearer '+jwt.sign(res, jwt_config.jwtSecretKey, { expiresIn: jwt_config.expiresIn })
+       result:{ //'Bearer '+
+         token:jwt.sign(res, jwt_config.jwtSecretKey, { expiresIn: jwt_config.expiresIn })
        }
      }
   } catch (error) {

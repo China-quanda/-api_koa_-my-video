@@ -93,5 +93,35 @@ module.exports = {
     code: '10208',
     message: '操作的商品信息不存在!',
     result: '',
+  },
+  goods_idNotNull:{
+    code: '10209',
+    message: '商品id不能为空!',
+    result: '',
+  },
+  goodsNumber:{
+    code: '10210',
+    message: '商品id必须是number类型!',
+    result: '',
+  },
+  validatorGoodsnumber:{
+    code: '10211',
+    message: '商品数量必须是number类型!',
+    result: '',
+  },
+  validatorGoodsselected:{
+    code: '10212',
+    message: '商品查询必须是Boolean类型!',
+    result: '',
+  },
+  validatornumberselected:{
+    code: '10213',
+    message: 'number和selected不能同时为空!',
+    result: '',
+  },
+  validatorarr:{
+    code: '10214',
+    message: 'ids不能为空',
+    result: '',
   }
 }

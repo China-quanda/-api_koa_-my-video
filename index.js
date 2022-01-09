@@ -47,8 +47,10 @@ app.use(koaBody({
   formidable: {
     // uploadDir: path.join(__dirname, '/uploads'), //文件上传地址
     maxFileSize: 2000 * 1024 * 1024  ,  // 设置上传文件大小最大限制，默认2M
-    keepExtensions:true, //保存上传文件的后缀名
-  }
+    // keepExtensions:true, //保存上传文件的后缀名
+    
+  },
+  parsedMethods:['POST', 'PUT', 'PATCH','DELETE'],
 }))
 // 注册中间件 并配置需要托管的文件目录
 // app.use(static('./public'))
