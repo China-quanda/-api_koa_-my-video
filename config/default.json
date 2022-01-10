@@ -1,4 +1,7 @@
 {
+	"config_app":{
+		"port":3000
+	},
 	"config_name" : "develop",
 	"jwt_config" : {
 		"jwtSecretKey":"itcaliquandast",

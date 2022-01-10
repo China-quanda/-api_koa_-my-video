@@ -17,7 +17,6 @@ const seq = new Sequelize(db_config.database, db_config.user, db_config.password
     updatedAt: 'updated_at',
     deletedAt: 'deleted_at'
   },
-  // models: [path.join(__dirname, '..', 'models/**/*.js')]
 });
 
 // const con = async () => {
@@ -31,5 +30,5 @@ const seq = new Sequelize(db_config.database, db_config.user, db_config.password
 //   }
 // }
 
-// module.exports = seq
+
 module.exports = seq

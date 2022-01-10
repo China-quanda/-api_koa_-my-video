@@ -19,27 +19,7 @@ class UserController {
   async register(ctx, next) {
     // 1,获取数据
     const { user_name, password } = ctx.request.body
-    // 合法性
-    // if (!user_name || !password) {
-    //   console.error('用户名或密码为空', ctx.request.body);
-    //   ctx.status = 400
-    //   return ctx.body = {
-    //     code: '10001',
-    //     message: '用户名或密码为空',
-    //     resule: ''
-    //   }
-    // }
-    // 合理性
-    // if (await getUserInfo({ user_name })) {
-    //   ctx.status = 409
-    //   return ctx.body = {
-    //     code: '10002',
-    //     message: '用户已经存在',
-    //     result: ''
-    //   }
-    // }
-    //  用户名可以使用 对密码进行加密 再存储到数据库
-    // const hasPwd = bcrypt.hashSync(password, 10)
+    
     // 2，操作数据库 之前加上try 
     try {
       const res = await createUser(user_name, password)

@@ -5,7 +5,7 @@ const path = require('path')
 //导入koa2-cors 跨域
 const cors = require('koa2-cors')
 // 导入自己定义的router文件
-const router = require('./router')
+const router = require('../router')
 // 导入url解析对象   导入解析post解析对象  挂载到ctx.request.body
 const koaBody = require('koa-body')
 // 导入错误处理中间件
@@ -15,16 +15,11 @@ const static = require('koa-static')
 // 导入统一错误处理
 const errHandler = require('./errHandler')
 
-// const AccessLogmiddleware = require('./middleware/AccessLogmiddleware')
-
 // 实例化app对象
 const app = new Koa()
-const port = 3000 // 端口号
 
 //注册全局可用的中间件
 
-
-// add.use(AccessLogmiddleware)
 // error() 是正常用法  里面配置了对象就是高级用法
 app.use(error({
   format: (err) => {
@@ -40,7 +35,6 @@ app.use(error({
 // 这里cors中间件一定要写在路由之前
 app.use(cors());
 
-// app.use(mount('/home',static(path.join(__dirname, '/public')))
 // 在所有中间件之前注册全局中间件挂载到ctx.request.body
 app.use(koaBody({
   multipart: true,
@@ -54,7 +48,7 @@ app.use(koaBody({
 }))
 // 注册中间件 并配置需要托管的文件目录
 // app.use(static('./public'))
-app.use(static(path.join(__dirname, '/public')))
+app.use(static(path.join(__dirname, '../public')))
 
 // 挂载路由 中间件
 app
@@ -73,7 +67,6 @@ app.on('error', errHandler)
 
 
 
-// 启动服务器并监听3000端口
-app.listen(port, () => {
-  console.log(`server is running on http://127.0.0.1:${port}`);
-}) 
+
+
+module.exports = app
